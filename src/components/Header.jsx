@@ -3,12 +3,14 @@ import { FaUser } from 'react-icons/fa'
 export default function Header() {
     const user = {
         name: 'John Doe',
+        score: 100,
     }
     return (
-        <header className="flex h-16 w-full items-center justify-end bg-blue-400 p-4">
+        <header className="flex h-16 w-full items-center justify-between bg-blue-400 p-4 text-3xl">
+            <p className="text-2xl">Sua pontuação: {user.score}</p>
             <Link
                 href={'#'}
-                className="flex flex-wrap items-center gap-4 border-none text-3xl"
+                className="flex flex-wrap items-center gap-4 border-none"
             >
                 {user.name}
                 <FaUser />

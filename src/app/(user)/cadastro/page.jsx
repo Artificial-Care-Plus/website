@@ -16,6 +16,9 @@ export default function Cadastro() {
                 sucesso: false,
                 resposta: 'As senhas não coincidem',
             })
+            setTimeout(() => {
+                setStatus(null)
+            }, 3000)
             return
         }
         data.peso = parseFloat(data.peso)

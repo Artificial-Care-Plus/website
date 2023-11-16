@@ -1,13 +1,14 @@
 'use client'
 
+import StatusMsg from '@/components/StatusMsg'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef } from 'react'
-
+import { useEffect, useRef, useState } from 'react'
 export default function Login() {
     const email = useRef(null)
     const senha = useRef(null)
     const button = useRef(null)
+    const [status, setStatus] = useState(null)
     const router = useRouter()
     useEffect(() => {
         if (sessionStorage.getItem('token')) {
@@ -33,10 +34,21 @@ export default function Login() {
             sessionStorage.setItem('token', responseData.resposta)
             localStorage.setItem('credenciais', JSON.stringify(data))
             router.push('/')
+        } else {
+            setStatus(responseData)
+            setTimeout(() => {
+                setStatus(null)
+            }, 3000)
         }
     }
     return (
         <>
+            {status && (
+                <StatusMsg
+                    resposta={status.resposta}
+                    sucesso={status.sucesso}
+                />
+            )}
             <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12">
                 <form
                     action="#"

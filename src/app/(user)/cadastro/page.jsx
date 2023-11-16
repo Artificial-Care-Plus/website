@@ -26,14 +26,15 @@ export default function Cadastro() {
         })
         const responseData = await response.json()
         setStatus(responseData)
-        setTimeout(() => {
-            if (responseData.sucesso) {
-                localStorage.setItem('credenciais', JSON.stringify(data))
-                router.push('/login')
-            } else {
+        if (!responseData.sucesso) {
+            setTimeout(() => {
                 setStatus(null)
-            }
-        }, 3000)
+            }, 3000)
+            return
+        } else {
+            localStorage.setItem('credenciais', JSON.stringify(data))
+            router.push('/login')
+        }
     }
     return (
         <>

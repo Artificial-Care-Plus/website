@@ -62,6 +62,7 @@ export default function Login() {
                             className="border border-black"
                             name="email"
                             id="email"
+                            required
                             ref={email}
                         />
                     </div>
@@ -72,6 +73,7 @@ export default function Login() {
                             name="senha"
                             className="border border-black"
                             id="senha"
+                            required
                             ref={senha}
                         />
                     </div>

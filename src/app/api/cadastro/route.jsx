@@ -1,4 +1,5 @@
 import { serverUrl } from '@/components/helper'
+import { createUserToken } from '@/components/userValidation'
 import { NextRequest } from 'next/server'
 
 /**
@@ -16,7 +17,10 @@ export async function POST(req) {
             },
             body: JSON.stringify(body),
         })
-        const data = await response.text()
+        const data = await response.json()
+        if (data.sucesso) {
+            data['resposta'] = createUserToken(body.email)
+        }
         return new Response(data, { status: response.status })
     } catch (e) {
         return new Response(

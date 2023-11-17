@@ -37,7 +37,9 @@ export async function POST(req) {
             body: JSON.stringify(body),
         })
         const data = await response.json()
-        data['token'] = createUserToken(body.email)
+        if (data.sucesso) {
+            data['resposta'] = createUserToken(body.email)
+        }
         return new Response(data, { status: response.status })
     } catch (e) {
         return new Response(

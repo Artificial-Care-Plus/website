@@ -20,10 +20,10 @@ export async function POST(req) {
         return new Response(data, { status: response.status })
     } catch (e) {
         return new Response(
-            {
+            JSON.stringify({
                 sucesso: false,
                 resposta: 'Servidor não respondeu',
-            },
+            }),
             { status: 500 },
         )
     }

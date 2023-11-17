@@ -7,6 +7,7 @@ import { useState } from 'react'
 export default function Cadastro() {
     const [status, setStatus] = useState(null)
     const router = useRouter()
+    let manterLogado = false
     const onSubmit = async (event) => {
         event.preventDefault()
         const formData = new FormData(event.target)
@@ -35,7 +36,11 @@ export default function Cadastro() {
             }, 3000)
             return
         } else {
-            localStorage.setItem('credenciais', JSON.stringify(data))
+            sessionStorage.setItem('token', responseData.resposta)
+            if (manterLogado) {
+                localStorage.setItem('token', responseData.resposta)
+                localStorage.setItem('email', data.email)
+            }
             router.push('/login')
         }
     }
@@ -135,6 +140,23 @@ export default function Cadastro() {
                             className="border border-black"
                         />
                     </div>
+                    <div className="flex justify-around">
+                        <label
+                            htmlFor="manter-logado"
+                            className="flex justify-around"
+                        >
+                            Deseja continuar conectado
+                            <input
+                                type="checkbox"
+                                name="manter-logado"
+                                id="manter-logado"
+                                onChange={(e) =>
+                                    (manterLogado = e.target.checked)
+                                }
+                                className="border border-black"
+                            />
+                        </label>
+                    </div>
                     <button className="rounded-lg border border-black p-1">
                         Cadastrar
                     </button>
@@ -142,7 +164,7 @@ export default function Cadastro() {
                 <p>
                     Já tem uma conta?{' '}
                     <Link
-                        className="text-blue-600 transition-all duration-300 hover:text-lg hover:text-blue-800"
+                        className="text-blue-600 transition-all duration-300 hover:text-blue-800 hover:underline"
                         href={'/login'}
                     >
                         Entre

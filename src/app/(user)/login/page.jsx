@@ -6,18 +6,20 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 export default function Login() {
     const email = useRef(null)
-    const senha = useRef(null)
     const button = useRef(null)
+    const token = useRef(null)
+    let manterLogado = false
     const [status, setStatus] = useState(null)
     const router = useRouter()
     useEffect(() => {
         if (sessionStorage.getItem('token')) {
             router.push('/')
-        } else if (localStorage.getItem('credenciais')) {
-            const credenciais = JSON.parse(localStorage.getItem('credenciais'))
-            console.log(credenciais)
-            email.current.value = credenciais.email
-            senha.current.value = credenciais.senha
+        } else if (
+            localStorage.getItem('email') &&
+            localStorage.getItem('token')
+        ) {
+            email.current.value = localStorage.getItem('email')
+            token.current.value = localStorage.getItem('token')
             button.current.click()
         }
     }, [router])
@@ -32,7 +34,10 @@ export default function Login() {
         const responseData = await response.json()
         if (responseData.sucesso) {
             sessionStorage.setItem('token', responseData.resposta)
-            localStorage.setItem('credenciais', JSON.stringify(data))
+            if (manterLogado) {
+                localStorage.setItem('token', responseData.resposta)
+                localStorage.setItem('email', data.email)
+            }
             router.push('/')
         } else {
             setStatus(responseData)
@@ -62,7 +67,6 @@ export default function Login() {
                             className="border border-black"
                             name="email"
                             id="email"
-                            required
                             ref={email}
                         />
                     </div>
@@ -73,10 +77,26 @@ export default function Login() {
                             name="senha"
                             className="border border-black"
                             id="senha"
-                            required
-                            ref={senha}
                         />
                     </div>
+                    <div className="flex justify-around">
+                        <label
+                            htmlFor="manter-logado"
+                            className="flex justify-around"
+                        >
+                            Deseja continuar conectado
+                            <input
+                                type="checkbox"
+                                name="manter-logado"
+                                id="manter-logado"
+                                onChange={(e) =>
+                                    (manterLogado = e.target.checked)
+                                }
+                                className="border border-black"
+                            />
+                        </label>
+                    </div>
+                    <input type="hidden" name="token" ref={token} />
                     <button
                         ref={button}
                         className="rounded-lg border border-black p-1"
@@ -87,7 +107,7 @@ export default function Login() {
                 <p>
                     Ainda não tem cadastro?{' '}
                     <Link
-                        className="text-blue-600 transition-all duration-300 hover:text-lg hover:text-blue-800"
+                        className="text-blue-600 transition-all duration-300 hover:text-blue-800 hover:underline"
                         href={'/cadastro'}
                     >
                         Crie sua conta

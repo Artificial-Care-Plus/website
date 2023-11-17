@@ -8,7 +8,7 @@ import { NextRequest } from 'next/server'
 export async function POST(req) {
     const url = `${serverUrl}/usuario`
     const body = await req.json()
-    console.log(url, body)
+    delete body['manter-logado']
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -19,7 +19,7 @@ export async function POST(req) {
         })
         const data = await response.json()
         if (data.sucesso) {
-            data['resposta'] = createUserToken(body.email)
+            data['resposta'] = await createUserToken(body.email)
         }
         return new Response(JSON.stringify(data), { status: response.status })
     } catch (e) {

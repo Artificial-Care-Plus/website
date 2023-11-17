@@ -8,8 +8,9 @@ import { NextRequest } from 'next/server'
 export async function POST(req) {
     const url = `${serverUrl}/login`
     const body = await req.json()
-    if (body.token && body.email) {
-        const newToken = revalidateUser(body.email)
+    delete body['manter-logado']
+    if (body.token && body.email && !body.senha) {
+        const newToken = await revalidateUser(body.email, body.token)
         if (newToken) {
             return new Response(
                 JSON.stringify({
@@ -38,7 +39,7 @@ export async function POST(req) {
         })
         const data = await response.json()
         if (data.sucesso) {
-            data['resposta'] = createUserToken(body.email)
+            data['resposta'] = await createUserToken(body.email)
         }
         return new Response(JSON.stringify(data), { status: response.status })
     } catch (e) {

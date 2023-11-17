@@ -9,5 +9,5 @@ export function createUserToken(email) {
     return token
 }
 export function revalidateUser(email, token) {
-    return tokens.get(email) === token ? crypto.randomUUID() : null
+    return tokens.get(email) === token ? createUserToken(email) : null
 }

@@ -21,7 +21,7 @@ export async function POST(req) {
         if (data.sucesso) {
             data['resposta'] = createUserToken(body.email)
         }
-        return new Response(data, { status: response.status })
+        return new Response(JSON.stringify(data), { status: response.status })
     } catch (e) {
         return new Response(
             JSON.stringify({

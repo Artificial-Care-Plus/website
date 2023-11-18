@@ -1,5 +1,5 @@
-import { serverUrl } from '@/components/helper'
-import { createUserToken, revalidateUser } from '@/components/userValidation'
+import { serverUrl } from '@/scripts/helper'
+import { createUserToken, revalidateUser } from '@/scripts/userValidation'
 import { NextRequest } from 'next/server'
 
 /**

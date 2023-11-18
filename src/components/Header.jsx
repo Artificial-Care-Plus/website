@@ -30,9 +30,6 @@ export default function Header() {
             <p className="text-2xl">
                 Sua pontuação: {user ? user.score : loadingSpan}
             </p>
-            <p className="text-xl">
-                Dica do dia: Lorem ipsum dolor sit amet consectetur adipisicing.
-            </p>
             <Link
                 href={'#'}
                 className="flex flex-wrap items-center gap-4 border-none"

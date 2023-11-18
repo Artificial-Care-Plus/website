@@ -9,13 +9,13 @@ import { UserContext } from './User'
 export default function Header() {
     const [user, setUser] = useContext(UserContext)
     useEffect(() => {
-        const response = fetch(
-            `${serverUrl}/usuario/${localStorage.getItem('email')}`,
-        )
-        const acoes = getAcoes()
-        Promise.all([response, acoes]).then(async ([res, acoes]) => {
-            const response = await res.json()
-            const newUser = { ...response, score: 0 }
+        ;(async () => {
+            const response = await fetch(
+                `${serverUrl}/usuario/${localStorage.getItem('email')}`,
+            )
+            const user = await response.json()
+            const acoes = await getAcoes(user.email)
+            const newUser = { ...user, score: 0 }
             if (!acoes.length === 0) {
                 newUser['score'] = acoes.reduce(
                     (acc, cur) => acc + cur.score,
@@ -23,7 +23,7 @@ export default function Header() {
                 )
             }
             setUser(newUser)
-        })
+        })()
     }, [setUser])
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
     return (

@@ -1,5 +1,5 @@
-import { serverUrl } from '@/scripts/javaServerHelper'
-import { createUserToken } from '@/scripts/userValidation'
+import { serverUrl } from '@/modules/javaServerHelper'
+import { createUserToken } from '@/modules/userValidation'
 import { NextRequest } from 'next/server'
 
 /**

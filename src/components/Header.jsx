@@ -1,6 +1,6 @@
 'use client'
-import { serverUrl } from '@/scripts/javaServerHelper'
-import { getAcoes } from '@/scripts/scoreCalculation'
+import { serverUrl } from '@/modules/javaServerHelper'
+import { getAcoes } from '@/modules/scoreCalculation'
 import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 import { FaUser } from 'react-icons/fa'

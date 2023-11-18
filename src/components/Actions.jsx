@@ -1,6 +1,6 @@
 'use client'
 
-import { serverUrl } from '@/scripts/javaServerHelper'
+import { serverUrl } from '@/modules/javaServerHelper'
 import { useContext } from 'react'
 import { UserContext } from './User'
 

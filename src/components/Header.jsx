@@ -1,15 +1,28 @@
 'use client'
 import { serverUrl } from '@/scripts/javaServerHelper'
+import { getAcoes } from '@/scripts/scoreCalculation'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
+
 export default function Header() {
     const [user, setUser] = useState(null)
     useEffect(() => {
         const response = fetch(
             `${serverUrl}/usuario/${localStorage.getItem('email')}`,
         )
-        response.then((res) => res.json()).then((res) => setUser(res))
+        const acoes = getAcoes()
+        Promise.all([response, acoes]).then(async ([res, acoes]) => {
+            const response = await res.json()
+            const newUser = { ...response, score: 0 }
+            if (!acoes.length === 0) {
+                newUser['score'] = acoes.reduce(
+                    (acc, cur) => acc + cur.score,
+                    0,
+                )
+            }
+            setUser(newUser)
+        })
     }, [])
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
     return (

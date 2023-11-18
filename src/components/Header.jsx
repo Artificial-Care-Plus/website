@@ -16,7 +16,7 @@ export default function Header() {
             const user = await response.json()
             const acoes = await getAcoes(user.email)
             const newUser = { ...user, score: 0 }
-            if (!acoes.length === 0) {
+            if (acoes.length !== 0) {
                 newUser['score'] = acoes.reduce(
                     (acc, cur) => acc + cur.score,
                     0,

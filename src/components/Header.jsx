@@ -2,11 +2,12 @@
 import { serverUrl } from '@/scripts/javaServerHelper'
 import { getAcoes } from '@/scripts/scoreCalculation'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { FaUser } from 'react-icons/fa'
+import { UserContext } from './User'
 
 export default function Header() {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useContext(UserContext)
     useEffect(() => {
         const response = fetch(
             `${serverUrl}/usuario/${localStorage.getItem('email')}`,
@@ -23,7 +24,7 @@ export default function Header() {
             }
             setUser(newUser)
         })
-    }, [])
+    }, [setUser])
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
     return (
         <header className="flex h-16 w-full items-center justify-between bg-blue-400 p-4 text-3xl">

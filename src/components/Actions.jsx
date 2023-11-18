@@ -1,5 +1,11 @@
 'use client'
+
+import { useContext } from 'react'
+import { UserContext } from './User'
+
 export default function Actions() {
+    const [user, setUser] = useContext(UserContext)
+    console.log(user)
     let value = 0
     return (
         <div className="w-2/3 border-4 border-green-600 p-4">

@@ -1,4 +1,4 @@
-import { serverUrl } from '@/scripts/helper'
+import { serverUrl } from '@/scripts/javaServerHelper'
 import { createUserToken } from '@/scripts/userValidation'
 import { NextRequest } from 'next/server'
 

@@ -37,9 +37,9 @@ export default function Cadastro() {
             return
         } else {
             sessionStorage.setItem('token', responseData.resposta)
+            localStorage.setItem('email', data.email)
             if (manterLogado) {
                 localStorage.setItem('token', responseData.resposta)
-                localStorage.setItem('email', data.email)
             }
             router.push('/login')
         }

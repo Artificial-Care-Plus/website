@@ -34,9 +34,9 @@ export default function Login() {
         const responseData = await response.json()
         if (responseData.sucesso) {
             sessionStorage.setItem('token', responseData.resposta)
+            localStorage.setItem('email', data.email)
             if (manterLogado) {
                 localStorage.setItem('token', responseData.resposta)
-                localStorage.setItem('email', data.email)
             }
             router.push('/')
         } else {

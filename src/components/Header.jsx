@@ -32,7 +32,12 @@ export default function Header() {
     return (
         <header className="flex h-24 w-full items-center justify-between bg-cor-principal p-4 text-xl text-white">
             <Link href="/">
-                <Image src={logo} height={86} alt={'Logo'} />
+                <Image
+                    src={logo}
+                    height={86}
+                    alt={'Logo'}
+                    className="transition-all duration-300 hover:scale-110"
+                />
             </Link>
             <div className="flex h-full flex-col items-end justify-between">
                 <p className="flex flex-wrap items-center gap-4 border-none ">

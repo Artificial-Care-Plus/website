@@ -10,6 +10,17 @@ export default function Cadastro() {
     const [status, setStatus] = useState(null)
     const router = useRouter()
     let manterLogado = false
+
+    const dataMinima = () => {
+        const idadeMinima = 13
+        return `${
+            parseInt(new Date().toISOString().split('T')[0].slice(0, 4)) -
+            idadeMinima
+        }-${new Date().toISOString().split('T')[0].slice(5, 7)}-${new Date()
+            .toISOString()
+            .split('T')[0]
+            .slice(8, 10)}`
+    }
     const onSubmit = async (event) => {
         event.preventDefault()
         const formData = new FormData(event.target)
@@ -57,6 +68,7 @@ export default function Cadastro() {
             )}
             <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12 max-lg:p-0 max-lg:pb-8 max-lg:pt-8">
                 <form action="#" onSubmit={onSubmit} className="formCadastro">
+                    <legend className="text-2xl font-bold">Cadastro</legend>
                     <div className={'flex flex-col justify-around'}>
                         <label htmlFor="nome">Nome: </label>
                         <input
@@ -108,6 +120,7 @@ export default function Cadastro() {
                             type="date"
                             name="nascimento"
                             id="nascimento"
+                            max={dataMinima()}
                         />
                     </div>
                     <div className={'flex flex-col justify-around'}>

@@ -1,5 +1,6 @@
 'use client'
 
+import HeaderUser from '@/components/HeaderUser'
 import StatusMsg from '@/components/StatusMsg'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -48,19 +49,23 @@ export default function Login() {
     }
     return (
         <>
+        <HeaderUser>Faça seu login!</HeaderUser>
+            <main className="flex h-[93vh] w-full flex-col items-center justify-center gap-4 p-12">
             {status && (
                 <StatusMsg
                     resposta={status.resposta}
                     sucesso={status.sucesso}
                 />
             )}
-            <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12">
                 <form
                     action="#"
-                    className="flex flex-col gap-4 rounded-sm border border-black p-2"
+                    className="formLogin"
                     onSubmit={onSubmit}
                 >
-                    <div>
+                    <legend className="text-2xl font-bold">
+                        Login
+                    </legend>
+                    <div className='flex flex-col'>
                         <label htmlFor="email">E-mail: </label>
                         <input
                             type="email"
@@ -70,7 +75,7 @@ export default function Login() {
                             ref={email}
                         />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                         <label htmlFor="senha">Senha: </label>
                         <input
                             type="password"
@@ -82,7 +87,7 @@ export default function Login() {
                     <div className="flex justify-around">
                         <label
                             htmlFor="manter-logado"
-                            className="flex justify-around"
+                            className="flex items-center gap-2"
                         >
                             Deseja continuar conectado
                             <input

@@ -31,7 +31,9 @@ export default function Header() {
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
     return (
         <header className="flex h-24 w-full items-center justify-between bg-cor-principal p-4 text-xl text-white">
-            <Image src={logo} height={86} alt={'Logo'} />
+            <Link href="/">
+                <Image src={logo} height={86} alt={'Logo'} />
+            </Link>
             <div className="flex h-full flex-col items-end justify-between">
                 <p className="flex flex-wrap items-center gap-4 border-none ">
                     Health Score: {user ? user.score : loadingSpan}{' '}

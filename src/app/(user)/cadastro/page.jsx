@@ -4,8 +4,8 @@ import StatusMsg from '@/components/StatusMsg'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import Image from 'next/image'
-import logo from '/public/static/logo.svg'
+import HeaderUser from '@/components/HeaderUser'
+
 export default function Cadastro() {
     const [status, setStatus] = useState(null)
     const router = useRouter()
@@ -48,16 +48,7 @@ export default function Cadastro() {
     }
     return (
         <>
-            <header className="flex relative justify-center items-center h-16 w-full bg-cor-principal text-white">
-                <Image
-                src={logo}
-                alt="Logo"
-                width={100}
-                height={100}
-                className='absolute top-1 left-1 max-lg:relative max-lg:top-0 max-lg:left-0'
-                />
-                <h1 className="text-4xl font-bold italic max-lg:hidden">Faça seu cadastro e cuide da sua saúde!</h1>
-            </header>
+            <HeaderUser>Faça seu cadastro e cuide da sua saúde!</HeaderUser>
             {status && (
                 <StatusMsg
                     resposta={status.resposta}
@@ -65,11 +56,7 @@ export default function Cadastro() {
                 />
             )}
             <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12 max-lg:p-0 max-lg:pb-8 max-lg:pt-8">
-                <form
-                    action="#"
-                    onSubmit={onSubmit}
-                    className="formCadastro"
-                >
+                <form action="#" onSubmit={onSubmit} className="formCadastro">
                     <div className={'flex flex-col justify-around'}>
                         <label htmlFor="nome">Nome: </label>
                         <input
@@ -150,7 +137,7 @@ export default function Cadastro() {
                     <div className="flex justify-around">
                         <label
                             htmlFor="manter-logado"
-                            className='flex items-center gap-2'
+                            className="flex items-center gap-2"
                         >
                             Deseja continuar conectado
                             <input
@@ -164,9 +151,7 @@ export default function Cadastro() {
                             />
                         </label>
                     </div>
-                    <button>
-                        Cadastrar
-                    </button>
+                    <button>Cadastrar</button>
                 </form>
                 <p>
                     Já tem uma conta?{' '}

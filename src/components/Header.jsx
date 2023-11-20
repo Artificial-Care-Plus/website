@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useContext, useEffect } from 'react'
 import { FaUser } from 'react-icons/fa'
-import { PiHeartbeatFill } from "react-icons/pi";
+import { PiHeartbeatFill } from 'react-icons/pi'
 import { UserContext } from './User'
 import logo from '/public/static/logo.svg'
 
@@ -31,21 +31,19 @@ export default function Header() {
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
     return (
         <header className="flex h-24 w-full items-center justify-between bg-cor-principal p-4 text-xl text-white">
-            <Image
-            src={logo}
-            height={86}
-            />
-            <div className='flex flex-col items-end justify-between h-full'>
-            <p  className="flex flex-wrap items-center gap-4 border-none ">
-                Health Score: {user ? user.score : loadingSpan} <PiHeartbeatFill/>
-            </p>
-            <Link
-                href={'#'}
-                className="flex flex-wrap items-center gap-4 border-none "
-            >
-                {user ? user.nome : loadingSpan}
-                <FaUser />
-            </Link>
+            <Image src={logo} height={86} />
+            <div className="flex h-full flex-col items-end justify-between">
+                <p className="flex flex-wrap items-center gap-4 border-none ">
+                    Health Score: {user ? user.score : loadingSpan}{' '}
+                    <PiHeartbeatFill />
+                </p>
+                <Link
+                    href={'#'}
+                    className="flex flex-wrap items-center gap-4 border-none "
+                >
+                    {user ? user.nome : loadingSpan}
+                    <FaUser />
+                </Link>
             </div>
         </header>
     )

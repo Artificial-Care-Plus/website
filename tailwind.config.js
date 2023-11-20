@@ -13,8 +13,8 @@ module.exports = {
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
             colors: {
-                'cor-principal': 'var(--cor-principal)',
-                'cor-principal-hover': 'var(--cor-principal-hover)',
+                'cor-principal': 'rgb(255, 104, 34)',
+                'cor-principal-hover': 'rgb(207, 87, 31)',
             },
         },
     },

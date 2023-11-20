@@ -50,7 +50,7 @@ export default function Login() {
     return (
         <>
         <HeaderUser>Faça seu login!</HeaderUser>
-            <main className="flex h-[93vh] w-full flex-col items-center justify-center gap-4 p-12">
+            <main className="flex h-[89vh] w-full flex-col items-center justify-center gap-4 p-12 max-lg:p-0">
             {status && (
                 <StatusMsg
                     resposta={status.resposta}
@@ -109,7 +109,7 @@ export default function Login() {
                         Entrar
                     </button>
                 </form>
-                <p>
+                <p className='text-center'>
                     Ainda não tem cadastro?{' '}
                     <Link
                         className="text-blue-600 transition-all duration-300 hover:text-blue-800 hover:underline"

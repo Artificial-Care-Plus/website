@@ -68,7 +68,9 @@ export default function Cadastro() {
             )}
             <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12 max-lg:p-0 max-lg:pb-8 max-lg:pt-8">
                 <form action="#" onSubmit={onSubmit} className="formCadastro">
-                    <legend className="text-2xl font-bold">Cadastro</legend>
+                    <legend className="text-2xl font-bold max-lg:text-center">
+                        Cadastro
+                    </legend>
                     <div className={'flex flex-col justify-around'}>
                         <label htmlFor="nome">Nome: </label>
                         <input

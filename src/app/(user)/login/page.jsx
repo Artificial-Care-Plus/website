@@ -49,23 +49,19 @@ export default function Login() {
     }
     return (
         <>
-        <HeaderUser>Faça seu login!</HeaderUser>
+            <HeaderUser>Faça seu login!</HeaderUser>
             <main className="flex h-[89vh] w-full flex-col items-center justify-center gap-4 p-12 max-lg:p-0">
-            {status && (
-                <StatusMsg
-                    resposta={status.resposta}
-                    sucesso={status.sucesso}
-                />
-            )}
-                <form
-                    action="#"
-                    className="formLogin"
-                    onSubmit={onSubmit}
-                >
-                    <legend className="text-2xl font-bold">
+                {status && (
+                    <StatusMsg
+                        resposta={status.resposta}
+                        sucesso={status.sucesso}
+                    />
+                )}
+                <form action="#" className="formLogin" onSubmit={onSubmit}>
+                    <legend className="text-2xl font-bold max-lg:text-center">
                         Login
                     </legend>
-                    <div className='flex flex-col'>
+                    <div className="flex flex-col">
                         <label htmlFor="email">E-mail: </label>
                         <input
                             type="email"
@@ -75,7 +71,7 @@ export default function Login() {
                             ref={email}
                         />
                     </div>
-                    <div className='flex flex-col'>
+                    <div className="flex flex-col">
                         <label htmlFor="senha">Senha: </label>
                         <input
                             type="password"
@@ -109,7 +105,7 @@ export default function Login() {
                         Entrar
                     </button>
                 </form>
-                <p className='text-center'>
+                <p className="text-center">
                     Ainda não tem cadastro?{' '}
                     <Link
                         className="text-blue-600 transition-all duration-300 hover:text-blue-800 hover:underline"

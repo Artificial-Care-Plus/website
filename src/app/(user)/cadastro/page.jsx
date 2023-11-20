@@ -4,6 +4,8 @@ import StatusMsg from '@/components/StatusMsg'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Image from 'next/image'
+import logo from '/public/static/logo.svg'
 export default function Cadastro() {
     const [status, setStatus] = useState(null)
     const router = useRouter()
@@ -46,19 +48,29 @@ export default function Cadastro() {
     }
     return (
         <>
+            <header className="flex relative justify-center items-center h-16 w-full bg-cor-principal text-white">
+                <Image
+                src={logo}
+                alt="Logo"
+                width={100}
+                height={100}
+                className='absolute top-1 left-1 max-lg:relative max-lg:top-0 max-lg:left-0'
+                />
+                <h1 className="text-4xl font-bold italic max-lg:hidden">Faça seu cadastro e cuide da sua saúde!</h1>
+            </header>
             {status && (
                 <StatusMsg
                     resposta={status.resposta}
                     sucesso={status.sucesso}
                 />
             )}
-            <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12">
+            <main className="flex h-full w-full flex-col items-center justify-center gap-4 p-12 max-lg:p-0 max-lg:pb-8 max-lg:pt-8">
                 <form
                     action="#"
                     onSubmit={onSubmit}
-                    className="flex flex-col gap-4 rounded-sm border border-black p-4"
+                    className="formCadastro"
                 >
-                    <div className={'flex justify-around'}>
+                    <div className={'flex flex-col justify-around'}>
                         <label htmlFor="nome">Nome: </label>
                         <input
                             required
@@ -66,10 +78,9 @@ export default function Cadastro() {
                             name="nome"
                             id="nome"
                             placeholder="Digite seu nome"
-                            className="border border-black"
                         />
                     </div>
-                    <div className={'flex justify-around'}>
+                    <div className={'flex flex-col justify-around'}>
                         <label htmlFor="email">E-mail: </label>
                         <input
                             required
@@ -77,10 +88,9 @@ export default function Cadastro() {
                             name="email"
                             id="email"
                             placeholder="Digite seu e-mail"
-                            className="border border-black"
                         />
                     </div>
-                    <div className={'flex justify-around'}>
+                    <div className={'flex flex-col justify-around'}>
                         <label htmlFor="senha">Senha: </label>
                         <input
                             required
@@ -89,10 +99,9 @@ export default function Cadastro() {
                             id="senha"
                             minLength={8}
                             placeholder="Digite sua senha"
-                            className="border border-black"
                         />
                     </div>
-                    <div className="flex justify-around">
+                    <div className="flex flex-col justify-around">
                         <label htmlFor="confirm-senha">
                             Confirme sua senha:{' '}
                         </label>
@@ -103,20 +112,18 @@ export default function Cadastro() {
                             id="confirm-senha"
                             minLength={8}
                             placeholder="Confirme sua senha"
-                            className="border border-black"
                         />
                     </div>
-                    <div className={'flex justify-around'}>
+                    <div className={'flex flex-col justify-around'}>
                         <label htmlFor="nascimento">Nascimento: </label>
                         <input
                             required
                             type="date"
                             name="nascimento"
                             id="nascimento"
-                            className="w-2/3 border border-black"
                         />
                     </div>
-                    <div className={'flex justify-around'}>
+                    <div className={'flex flex-col justify-around'}>
                         <label htmlFor="peso">Peso(kg): </label>
                         <input
                             required
@@ -125,10 +132,10 @@ export default function Cadastro() {
                             step="any"
                             id="peso"
                             max={400}
-                            className="border border-black"
+                            min={10}
                         />
                     </div>
-                    <div className={'flex justify-around'}>
+                    <div className={'flex flex-col justify-around'}>
                         <label htmlFor="altura">Altura(m): </label>
                         <input
                             required
@@ -136,14 +143,14 @@ export default function Cadastro() {
                             name="altura"
                             id="altura"
                             max={3}
+                            min={0.5}
                             step="any"
-                            className="border border-black"
                         />
                     </div>
                     <div className="flex justify-around">
                         <label
                             htmlFor="manter-logado"
-                            className="flex justify-around"
+                            className='flex items-center gap-2'
                         >
                             Deseja continuar conectado
                             <input
@@ -157,7 +164,7 @@ export default function Cadastro() {
                             />
                         </label>
                     </div>
-                    <button className="rounded-lg border border-black p-1">
+                    <button>
                         Cadastrar
                     </button>
                 </form>

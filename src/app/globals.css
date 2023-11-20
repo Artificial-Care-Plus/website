@@ -2,3 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --cor-principal: rgb(255,104,34);
+    --cor-principal-hover: rgb(207, 87, 31);
+  }
+
+
+@layer components {
+    .formCadastro{
+        @apply bg-white shadow-[0_0_2px_2px_rgba(0,0,0,0.25)] flex flex-col gap-4 p-6 rounded-2xl w-full max-w-screen-lg max-lg:rounded-none max-lg:shadow-none;
+    
+    & input {
+        @apply p-1 rounded-md min-h-[40px] border border-solid border-gray-300;
+    }
+
+    & label {
+        @apply text-black text-lg font-semibold;
+    }
+    & button {
+        @apply bg-cor-principal text-white font-semibold p-2 text-xl rounded-md min-h-[40px] hover:bg-cor-principal-hover transition-all duration-200;
+    }
+    
+}
+}

@@ -2,7 +2,7 @@ import React, { Children } from 'react'
 import Image from 'next/image'
 import logo from '/public/static/logo.svg'
 
-export default function HeaderUser({children}) {
+export default function HeaderUser({ children }) {
     return (
         <>
             <header className="relative flex h-16 w-full items-center justify-center bg-cor-principal text-white">

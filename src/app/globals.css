@@ -3,25 +3,23 @@
 @tailwind utilities;
 
 :root {
-    --cor-principal: rgb(255,104,34);
+    --cor-principal: rgb(255, 104, 34);
     --cor-principal-hover: rgb(207, 87, 31);
-  }
-
+}
 
 @layer components {
-    .formCadastro{
-        @apply bg-white shadow-[0_0_2px_2px_rgba(0,0,0,0.25)] flex flex-col gap-4 p-6 rounded-2xl w-full max-w-screen-lg max-lg:rounded-none max-lg:shadow-none;
-    
-    & input {
-        @apply p-1 rounded-md min-h-[40px] border border-solid border-gray-300;
-    }
+    .formCadastro {
+        @apply flex w-full max-w-screen-lg flex-col gap-4 rounded-2xl bg-white p-6 shadow-[0_0_2px_2px_rgba(0,0,0,0.25)] max-lg:rounded-none max-lg:shadow-none;
 
-    & label {
-        @apply text-black text-lg font-semibold;
+        & input {
+            @apply min-h-[40px] rounded-md border border-solid border-gray-300 p-1;
+        }
+
+        & label {
+            @apply text-lg font-semibold text-black;
+        }
+        & button {
+            @apply min-h-[40px] rounded-md bg-cor-principal p-2 text-xl font-semibold text-white transition-all duration-200 hover:bg-cor-principal-hover;
+        }
     }
-    & button {
-        @apply bg-cor-principal text-white font-semibold p-2 text-xl rounded-md min-h-[40px] hover:bg-cor-principal-hover transition-all duration-200;
-    }
-    
-}
 }

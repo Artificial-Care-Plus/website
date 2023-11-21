@@ -7,6 +7,15 @@ module.exports = {
     ],
     theme: {
         extend: {
+            keyframes: {
+                delayText: {
+                    '0%': { opacity: 0 },
+                    '100%': { opacity: 1 },
+                },
+            },
+            animation: {
+                'delay-text': 'delayText 0.5s ease-in-out',
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic':

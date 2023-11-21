@@ -11,6 +11,10 @@ export default function Actions() {
     let desc = ''
     const onClick = () => {
         if (!value || !horas) return
+        if (parseInt(value) * horas > 100)
+            return alert('Você não pode adicionar mais de 100 pontos por dia')
+        if (horas > 24)
+            return alert('Você não pode adicionar mais de 24 horas por dia')
         const body = {
             data: new Date().toJSON().slice(0, 10),
             descricao: desc,
@@ -45,7 +49,7 @@ export default function Actions() {
                         desc = e.target.options[e.target.selectedIndex].text
                     }}
                 >
-                    <option value="0" disabled>
+                    <option value="0" disabled selected>
                         Selecione
                     </option>
                     <option value="20">Caminhada</option>
@@ -63,6 +67,7 @@ export default function Actions() {
                     name="horas"
                     id="horas"
                     className="w-1/6 rounded-lg border border-black p-1"
+                    max={24}
                     onChange={(e) => {
                         horas = e.target.value
                     }}

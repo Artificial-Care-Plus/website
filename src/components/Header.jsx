@@ -3,11 +3,12 @@ import { serverUrl } from '@/modules/javaServerHelper'
 import { getAcoes } from '@/modules/scoreCalculation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { PiHeartbeatFill } from 'react-icons/pi'
 import { UserContext } from './User'
 import logo from '/public/static/logo.svg'
+import ModalUser from './ModalUser'
 
 export default function Header() {
     const [user, setUser] = useContext(UserContext)
@@ -29,8 +30,12 @@ export default function Header() {
         })()
     }, [setUser])
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
+    const [openModal, setOpenModal] = useState(false)
     return (
         <header className="flex h-24 w-full items-center justify-between bg-cor-principal p-4 text-xl text-white">
+            {openModal && <ModalUser 
+            setOpenModal={setOpenModal}
+            />}
             <Link href="/">
                 <Image
                     src={logo}
@@ -44,13 +49,13 @@ export default function Header() {
                     Health Score: {user ? user.score : loadingSpan}{' '}
                     <PiHeartbeatFill />
                 </p>
-                <Link
-                    href={'#'}
-                    className="flex flex-wrap items-center gap-4 border-none "
+                <button
+                    onClick={() => setOpenModal(true)}
+                    className="flex flex-wrap items-center gap-4 border-none"
                 >
                     {user ? user.nome : loadingSpan}
                     <FaUser />
-                </Link>
+                </button>
             </div>
         </header>
     )

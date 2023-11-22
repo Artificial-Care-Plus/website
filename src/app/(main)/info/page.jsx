@@ -1,4 +1,4 @@
-import React from 'react'
+//pagina das informções ao usuario
 
 export default function Info() {
     return (
@@ -35,7 +35,7 @@ export default function Info() {
                         <p class="text-gray-700">
                             O sedentarismo é prejudicial à saúde. Encontre uma
                             atividade física que você goste e a inclua na sua
-                            rotina diária. Pode ser caminhada, corrida, yoga ou
+                            rotina diária. Como por exemplo, caminhada, corrida, yoga ou
                             qualquer outra atividade que mantenha seu corpo em
                             movimento.
                         </p>

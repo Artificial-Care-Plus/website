@@ -9,7 +9,7 @@
 
 @layer components {
     .formCadastro,
-    .formLogin {
+    .formLogin, .formUpdate {
         @apply flex w-full max-w-screen-lg flex-col gap-4 rounded-2xl bg-white p-6 shadow-[0_0_2px_2px_rgba(0,0,0,0.25)] max-lg:rounded-none max-lg:shadow-none;
 
         & input {

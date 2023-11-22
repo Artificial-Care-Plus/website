@@ -1,6 +1,7 @@
 'use client'
 
 import Actions from '@/components/Actions'
+import Statistics from '@/components/Statistics'
 import Tip from '@/components/Tip'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -14,12 +15,10 @@ export default function Home() {
     })
     return (
         <>
-            <div className="flex flex-row flex-wrap">
+            <div className="flex h-full w-full flex-row flex-wrap">
                 <Actions />
                 <Tip />
-                <div className="w-full border-4 border-blue-700">
-                    <h1>Gráfico</h1>
-                </div>
+                <Statistics />
             </div>
         </>
     )

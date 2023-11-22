@@ -12,9 +12,9 @@ export default function Footer() {
     return (
         <footer>
             <div className="flex h-1/6 w-full flex-col items-center justify-center gap-2 bg-cor-principal p-4 py-2 text-black">
-                <div className="flex w-full flex-row justify-between gap-4 overflow-hidden text-center">
+                <div className="flex w-full flex-row flex-wrap justify-center gap-4 overflow-hidden text-center">
                     {membersInfo.map((member) => (
-                        <div key={member}>
+                        <div className='rounded-md p-2 shadow-lg' key={member}>
                             {member.map((info) => (
                                 <p
                                     key={info}

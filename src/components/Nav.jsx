@@ -18,9 +18,9 @@ export default function Nav() {
             ) : (
                 <div
                     onClick={() => setOpen(true)}
-                    className="fixed bottom-0 right-0 z-10 flex h-[10rem] w-[20rem] cursor-pointer items-center justify-center bg-cor-principal shadow-[0_0_2px_2px_rgba(0,0,0,0.25)] transition-all duration-500 max-lg:h-1/2 max-lg:w-screen"
+                    className="fixed bottom-0 right-0 z-10 flex h-[10rem] w-[20rem] cursor-pointer items-center justify-center bg-cor-principal shadow-[0_0_2px_2px_rgba(0,0,0,0.25)] transition-all duration-500 max-lg:h-[300px] max-lg:w-screen"
                 >
-                    <ul className="animate-delay-text flex flex-col items-center justify-center gap-2 text-center text-2xl text-white max-lg:gap-8 max-lg:text-4xl max-lg:underline">
+                    <ul className="flex animate-delay-text flex-col items-center justify-center gap-2 text-center text-2xl text-white max-lg:gap-8 max-lg:text-4xl max-lg:underline">
                         <li>
                             <Link className="hover:underline" href={'/about'}>
                                 Sobre nós
@@ -29,6 +29,11 @@ export default function Nav() {
                         <li>
                             <Link className="hover:underline" href={'/faq'}>
                                 FAQ
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="hover:underline" href={'/info'}>
+                                INFO
                             </Link>
                         </li>
                     </ul>

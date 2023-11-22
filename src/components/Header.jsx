@@ -32,7 +32,7 @@ export default function Header() {
     const loadingSpan = <span className="animate-pulse text-4xl">...</span>
     const [openModal, setOpenModal] = useState(false)
     return (
-        <header className="flex h-24 w-full items-center justify-between bg-cor-principal p-4 text-xl text-white">
+        <header className="flex h-fit w-full items-center justify-between bg-cor-principal p-4 text-xl text-white max-lg:flex-col">
             {openModal && <ModalUser 
             setOpenModal={setOpenModal}
             />}

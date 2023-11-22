@@ -1,13 +1,15 @@
 'use client'
 
 import { serverUrl } from '@/modules/javaServerHelper'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from './User'
 
 export default function Actions() {
     const [user, setUser] = useContext(UserContext)
+    const [atividade, setAtividade] = useState('')
     let value = ''
     let horas = 0
+    let distancia = 0
     let desc = ''
     const onClick = () => {
         if (!value || !horas) return
@@ -47,20 +49,37 @@ export default function Actions() {
                     onChange={(e) => {
                         value = e.target.value
                         desc = e.target.options[e.target.selectedIndex].text
+                        setAtividade(e.target.value)
                     }}
+                    id = "atividade"
                 >
                     <option value="0" disabled selected>
                         Selecione
                     </option>
-                    <option value="20">Caminhada</option>
-                    <option value="30">Corrida</option>
-                    <option value="60">Ciclismo</option>
-                    <option value="60">Natação</option>
-                    <option value="60">Musculação</option>
-                    <option value="20">Yoga</option>
-                    <option value="15">Alongamento</option>
-                    <option value="30">Dança</option>
+                    <option value="1">Treino livre</option>
+                    <option value="2">Bicicleta Ergométrica</option>
+                    <option value="3">Caminhada</option>
+                    <option value="4">Surfar</option>
+                    <option value="5">Ciclismo</option>
+                    <option value="6">Corrida ao ar livre</option>
+                    <option value="7">Corrida de Trilha</option>
+                    <option value="8">Natação</option>
+                    <option value="9">Trilha</option>
+                    <option value="10">Esteira</option>
+                    <option value="11">Cricket</option>
                 </select>
+                {['3','6','7','9','10'].includes(atividade) ? <><label htmlFor="distancia">Por quantos Km:</label>
+                <input
+                    type="number"
+                    name="distancia"
+                    id="distancia"
+                    className="w-1/6 rounded-lg border border-black p-1"
+                    max={200}
+                    min={0.1}
+                    onChange={(e) => {
+                        distancia = e.target.value
+                    }}
+                /></> : ''}
                 <label htmlFor="horas">Por quantas horas:</label>
                 <input
                     type="number"
@@ -68,6 +87,7 @@ export default function Actions() {
                     id="horas"
                     className="w-1/6 rounded-lg border border-black p-1"
                     max={24}
+                    min={0.1}
                     onChange={(e) => {
                         horas = e.target.value
                     }}

@@ -1,12 +1,13 @@
 'use client'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import StatusMsg from './StatusMsg'
+import { UserContext } from './User'
 
 
 export default function ModalUser({ setOpenModal }) {
     const [status, setStatus] = useState(null)
-    
+    const updateUser = useContext(UserContext)[1]
     const [user, setUser] = useState({
         nome: '',
         email: '',
@@ -48,29 +49,31 @@ export default function ModalUser({ setOpenModal }) {
                 },
                 body: JSON.stringify(user),
             },
+            
         )
         const data = await response.json()
         if(data.sucesso){
+            updateUser({...user})
             setStatus({sucesso: data.sucesso, resposta: data.resposta})
             setTimeout(() => {
                 setStatus(null)
                 setOpenModal(false)
-            }, 3000)
+            }, 2000)
         }
         else{
             setStatus({sucesso: data.sucesso, resposta: data.resposta})
             setTimeout(() => {
                 setStatus(null)
-            }, 3000)
+            }, 2000)
 
         }
     }
 
     return (
-        <div className="formUpdate fixed top-0 right-0 z-40  w-1/3 max-lg:w-screen overflow-scroll">
+        <div className="formUpdate fixed right-0 top-0 z-40  w-1/3 overflow-scroll max-lg:w-screen">
             <div className="relative">
             {status && (
-                <div className="absolute left-[50%] translate-x-[-50%] z-50 w-full">
+                <div className="absolute left-[50%] z-50 w-full translate-x-[-50%]">
                         <StatusMsg
                             resposta={status.resposta}
                             sucesso={status.sucesso}

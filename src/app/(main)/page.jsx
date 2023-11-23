@@ -1,6 +1,7 @@
 'use client'
 
 import Actions from '@/components/Actions'
+import History from '@/components/History'
 import Tip from '@/components/Tip'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -17,6 +18,7 @@ export default function Home() {
             <div className="flex h-full w-full flex-row flex-wrap">
                 <Actions />
                 <Tip />
+                <History />
             </div>
         </>
     )

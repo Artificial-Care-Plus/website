@@ -1,41 +1,52 @@
 'use client'
 
-import { serverUrl } from '@/modules/javaServerHelper'
+import { mapAcoesLabel } from '@/modules/scoreCalculation'
 import { useContext, useState } from 'react'
 import { UserContext } from './User'
 
 export default function Actions() {
     const [user, setUser] = useContext(UserContext)
     const [atividade, setAtividade] = useState('')
-    let value = ''
-    let horas = 0
-    let distancia = 0
-    let desc = ''
-    const onClick = () => {
-        if (!value || !horas) return
-        if (parseInt(value) * horas > 100)
-            return alert('Você não pode adicionar mais de 100 pontos por dia')
-        if (horas > 24)
+    const [desc, setDesc] = useState('')
+    const [value, setValue] = useState('')
+    const [min, setMin] = useState(0)
+    const [dist, setDist] = useState(0)
+    const onClick = async () => {
+        if (!value || !min) return
+        if (min > 24 * 60)
             return alert('Você não pode adicionar mais de 24 horas por dia')
+        const score = Math.trunc(
+            (
+                await (
+                    await fetch(
+                        `/api/calorias?workout_type=${mapAcoesLabel(
+                            desc,
+                        )}&time=${min}`,
+                    )
+                ).json()
+            ).prediction / 5,
+        )
+
         const body = {
             data: new Date().toJSON().slice(0, 10),
             descricao: desc,
-            duracao: horas,
-            score: parseInt(value) * horas,
+            duracao: min,
+            score: score,
             usuario: {
                 email: user.email,
             },
         }
-        fetch(`${serverUrl}/acoes`, {
+        fetch('/api/acoes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
+            mode: 'no-cors',
         }).then(() => {
             console.log('Enviado')
         })
-        setUser({ ...user, score: user.score + parseInt(value) * horas })
+        setUser({ ...user, score: user.score + body.score })
         console.log(user)
     }
     return (
@@ -46,10 +57,12 @@ export default function Actions() {
             <div className="flex flex-col items-center gap-2">
                 <select
                     defaultValue="0"
+                    defaultValue={'0'}
+
                     className="w-1/2 rounded-lg border border-black p-1"
                     onChange={(e) => {
-                        value = e.target.value
-                        desc = e.target.options[e.target.selectedIndex].text
+                        setValue(e.target.value)
+                        setDesc(e.target.options[e.target.selectedIndex].text)
                         setAtividade(e.target.value)
                     }}
                     id="atividade"
@@ -80,27 +93,29 @@ export default function Actions() {
                             max={200}
                             min={0.1}
                             onChange={(e) => {
-                                distancia = e.target.value
+                                setDist(e.target.value)
                             }}
                         />
                     </>
                 ) : (
                     ''
                 )}
-                <label htmlFor="horas">Por quantas horas:</label>
+                <label htmlFor="minutos">Por quantos minutos:</label>
                 <input
                     type="number"
-                    name="horas"
-                    id="horas"
+                    name="minutos"
+                    id="minutos"
                     className="w-1/6 rounded-lg border border-black p-1"
                     max={24}
                     min={0.1}
                     onChange={(e) => {
-                        horas = e.target.value
+                        setMin(e.target.value)
                     }}
                 />
                 <button
-                    onClick={onClick}
+                    onClick={() => {
+                        onClick()
+                    }}
                     className="rounded-sm border border-black p-2"
                 >
                     Adicionar

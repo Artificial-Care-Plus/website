@@ -14,12 +14,9 @@ export default function Home() {
     })
     return (
         <>
-            <div className="flex flex-row flex-wrap">
+            <div className="flex h-full w-full flex-row flex-wrap">
                 <Actions />
                 <Tip />
-                <div className="w-full border-4 border-blue-700">
-                    <h1>Gráfico</h1>
-                </div>
             </div>
         </>
     )

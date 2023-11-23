@@ -1,14 +1,11 @@
 'use client'
 import Image from 'next/image'
-import { useEffect, useState, useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from './User'
 
 export default function Tip() {
     const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)]
-    const images = ['1.jpg', '2.jpg', '3.jpg']
-    const loader = ({ src }) => {
-        return `${src}/${pickRandom(images)}`
-    }
+
     const [user, setUser] = useContext(UserContext)
     const [tip, setTip] = useState('')
     useEffect(() => {
@@ -27,8 +24,7 @@ export default function Tip() {
         <div className="w-1/3 border-4 border-purple-700">
             <Image
                 alt="Imagem de uma pessoa se exercitando"
-                src={'/static/fitness/'}
-                loader={loader}
+                src={'/static/fitness/3.jpg'}
                 placeholder="blur"
                 blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUl5SsBwABYgDK45ai7gAAAABJRU5ErkJggg=="
                 width={400}

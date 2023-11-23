@@ -2,15 +2,25 @@
 import { getAcoes } from '@/modules/scoreCalculation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { PiHeartbeatFill } from 'react-icons/pi'
+import { IoLogOut } from 'react-icons/io5'
 import ModalUser from './ModalUser'
 import { UserContext } from './User'
 import logo from '/public/static/logo.svg'
 
 export default function Header() {
     const [user, setUser] = useContext(UserContext)
+    const router = useRouter()
+    const handleLogout = () => {
+        sessionStorage.clear()
+        localStorage.removeItem('token')
+        setUser({})
+        router.push('/login', { scroll: false })
+    }
+
     useEffect(() => {
         ;(async () => {
             const response = await fetch(
@@ -52,6 +62,13 @@ export default function Header() {
                 >
                     {user ? user.nome : loadingSpan}
                     <FaUser />
+                </button>
+                <button
+                    onClick={() => handleLogout()}
+                    className="flex flex-wrap items-center gap-4 border-none"
+                >
+                    Sair
+                    <IoLogOut />
                 </button>
             </div>
         </header>

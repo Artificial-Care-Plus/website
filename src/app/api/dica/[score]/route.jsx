@@ -6,7 +6,6 @@ export async function GET(req, { params }) {
         const response = await fetch(url)
         let data = await response.json()
         if (response.status === 200) {
-            console.log(params)
             if (params.score < 500) {
                 data = data.filter((dica) => dica.categoria === 'Ruim')
             } else if (params.score < 1000) {

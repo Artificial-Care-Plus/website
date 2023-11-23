@@ -1,45 +1,81 @@
 'use client'
 
-import { serverUrl } from '@/modules/javaServerHelper'
+import { mapAcoesLabel } from '@/modules/scoreCalculation'
 import { useContext, useState } from 'react'
+import PopUp from './PopUp'
 import { UserContext } from './User'
 
 export default function Actions() {
     const [user, setUser] = useContext(UserContext)
     const [atividade, setAtividade] = useState('')
-    let value = ''
-    let horas = 0
-    let distancia = 0
-    let desc = ''
-    const onClick = () => {
-        if (!value || !horas) return
-        if (parseInt(value) * horas > 100)
-            return alert('Você não pode adicionar mais de 100 pontos por dia')
-        if (horas > 24)
+    const [desc, setDesc] = useState('')
+    const [value, setValue] = useState('')
+    const [min, setMin] = useState(0)
+    const [dist, setDist] = useState(0)
+    const [steps, setSteps] = useState(0)
+    const walkExercises = ['3', '6', '7', '9', '10']
+    const onClick = async () => {
+        if (!value || !min) return
+        if (min > 24 * 60)
             return alert('Você não pode adicionar mais de 24 horas por dia')
+        const score = Math.trunc(
+            (
+                await (
+                    await fetch(
+                        `/api/calorias?workout_type=${mapAcoesLabel(
+                            desc,
+                        )}&time=${min}`,
+                    )
+                ).json()
+            ).prediction / 5,
+        )
+
         const body = {
             data: new Date().toJSON().slice(0, 10),
             descricao: desc,
-            duracao: horas,
-            score: parseInt(value) * horas,
+            duracao: min,
+            score: score,
             usuario: {
                 email: user.email,
             },
         }
-        fetch(`${serverUrl}/acoes`, {
+        fetch('/api/acoes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body),
+            mode: 'no-cors',
         }).then(() => {
             console.log('Enviado')
         })
-        setUser({ ...user, score: user.score + parseInt(value) * horas })
+        setUser({ ...user, score: user.score + body.score })
+        if (dist && walkExercises.includes(atividade)) {
+            const steps = Math.trunc(
+                (
+                    await (
+                        await fetch(
+                            `/api/passos?workout_type=${mapAcoesLabel(
+                                desc,
+                            )}&time=${min}&distance=${dist}`,
+                        )
+                    ).json()
+                ).prediction,
+            )
+            setSteps(steps)
+            setTimeout(() => {
+                setSteps(0)
+            }, 2999)
+        }
         console.log(user)
     }
     return (
         <div className="w-2/3 border-4 border-green-600 p-4">
+            {steps > 0 && (
+                <PopUp>
+                    <h1>Você deu aproximadamente {steps} passos</h1>
+                </PopUp>
+            )}
             <h1 className="text-center text-2xl">
                 Quais Atividades Você praticou hoje?
             </h1>
@@ -48,8 +84,8 @@ export default function Actions() {
                     defaultValue="0"
                     className="w-1/2 rounded-lg border border-black p-1"
                     onChange={(e) => {
-                        value = e.target.value
-                        desc = e.target.options[e.target.selectedIndex].text
+                        setValue(e.target.value)
+                        setDesc(e.target.options[e.target.selectedIndex].text)
                         setAtividade(e.target.value)
                     }}
                     id="atividade"
@@ -69,7 +105,7 @@ export default function Actions() {
                     <option value="10">Esteira</option>
                     <option value="11">Cricket</option>
                 </select>
-                {['3', '6', '7', '9', '10'].includes(atividade) ? (
+                {walkExercises.includes(atividade) ? (
                     <>
                         <label htmlFor="distancia">Por quantos Km:</label>
                         <input
@@ -80,27 +116,29 @@ export default function Actions() {
                             max={200}
                             min={0.1}
                             onChange={(e) => {
-                                distancia = e.target.value
+                                setDist(e.target.value)
                             }}
                         />
                     </>
                 ) : (
                     ''
                 )}
-                <label htmlFor="horas">Por quantas horas:</label>
+                <label htmlFor="minutos">Por quantos minutos:</label>
                 <input
                     type="number"
-                    name="horas"
-                    id="horas"
+                    name="minutos"
+                    id="minutos"
                     className="w-1/6 rounded-lg border border-black p-1"
                     max={24}
                     min={0.1}
                     onChange={(e) => {
-                        horas = e.target.value
+                        setMin(e.target.value)
                     }}
                 />
                 <button
-                    onClick={onClick}
+                    onClick={() => {
+                        onClick()
+                    }}
                     className="rounded-sm border border-black p-2"
                 >
                     Adicionar

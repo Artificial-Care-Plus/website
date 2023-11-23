@@ -6,9 +6,9 @@ import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { PiHeartbeatFill } from 'react-icons/pi'
+import ModalUser from './ModalUser'
 import { UserContext } from './User'
 import logo from '/public/static/logo.svg'
-import ModalUser from './ModalUser'
 
 export default function Header() {
     const [user, setUser] = useContext(UserContext)
@@ -21,10 +21,10 @@ export default function Header() {
             const acoes = await getAcoes(user.email)
             const newUser = { ...user, score: 0 }
             if (acoes.length !== 0) {
-                newUser['score'] = acoes.reduce(
-                    (acc, cur) => acc + cur.score,
-                    0,
-                )
+                const score = acoes
+                    .map((acao) => acao.score)
+                    .reduce((acc, cur) => acc + cur)
+                newUser.score = Math.trunc(score)
             }
             setUser(newUser)
         })()
@@ -33,9 +33,7 @@ export default function Header() {
     const [openModal, setOpenModal] = useState(false)
     return (
         <header className="flex h-fit w-full items-center justify-between bg-cor-principal p-4 text-xl text-white max-lg:flex-col">
-            {openModal && <ModalUser 
-            setOpenModal={setOpenModal}
-            />}
+            {openModal && <ModalUser setOpenModal={setOpenModal} />}
             <Link href="/">
                 <Image
                     src={logo}

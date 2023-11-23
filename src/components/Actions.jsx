@@ -45,15 +45,16 @@ export default function Actions() {
             </h1>
             <div className="flex flex-col items-center gap-2">
                 <select
+                    defaultValue="0"
                     className="w-1/2 rounded-lg border border-black p-1"
                     onChange={(e) => {
                         value = e.target.value
                         desc = e.target.options[e.target.selectedIndex].text
                         setAtividade(e.target.value)
                     }}
-                    id = "atividade"
+                    id="atividade"
                 >
-                    <option value="0" disabled selected>
+                    <option value="0" disabled>
                         Selecione
                     </option>
                     <option value="1">Treino livre</option>
@@ -68,18 +69,24 @@ export default function Actions() {
                     <option value="10">Esteira</option>
                     <option value="11">Cricket</option>
                 </select>
-                {['3','6','7','9','10'].includes(atividade) ? <><label htmlFor="distancia">Por quantos Km:</label>
-                <input
-                    type="number"
-                    name="distancia"
-                    id="distancia"
-                    className="w-1/6 rounded-lg border border-black p-1"
-                    max={200}
-                    min={0.1}
-                    onChange={(e) => {
-                        distancia = e.target.value
-                    }}
-                /></> : ''}
+                {['3', '6', '7', '9', '10'].includes(atividade) ? (
+                    <>
+                        <label htmlFor="distancia">Por quantos Km:</label>
+                        <input
+                            type="number"
+                            name="distancia"
+                            id="distancia"
+                            className="w-1/6 rounded-lg border border-black p-1"
+                            max={200}
+                            min={0.1}
+                            onChange={(e) => {
+                                distancia = e.target.value
+                            }}
+                        />
+                    </>
+                ) : (
+                    ''
+                )}
                 <label htmlFor="horas">Por quantas horas:</label>
                 <input
                     type="number"

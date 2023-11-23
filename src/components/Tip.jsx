@@ -15,7 +15,6 @@ export default function Tip() {
                 const response = await fetch(`/api/dica/${score}`)
                 const data = await response.json()
                 setTip(pickRandom(data).texto)
-                console.log(data)
             }
         }
         fetchData()

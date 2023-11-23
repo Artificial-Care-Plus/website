@@ -4,6 +4,12 @@
 
 Ao acessar o site, você será direcionado para a página de login. Caso não tenha uma conta, você pode facilmente se cadastrar ao clicar em Crie sua conta para começar a monitorar e melhorar sua saúde.
 
+## Credenciais de acesso
+
+User: putz@putz
+
+senha: putzputz
+
 ## Cabeçalho
 
 Após o login, no topo da página, você pode clicar na logo do cabeçalho para ser redirecionado para a página principal do site. O cabeçalho é personalizado com o seu nome de usuário que ao clicar você terá acesso à opção de alterar seus dados pessoais.Além disso, será exibido o seu "Health Score", uma pontuação que reflete seu nível de saúde e suas atividades físicas registradas.

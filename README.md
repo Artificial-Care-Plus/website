@@ -6,6 +6,8 @@ Ao acessar o site, você será direcionado para a página de login. Caso não te
 
 ## Credenciais de acesso
 
+**Credencias de acesso a uma conta predefinida dentro do site:**
+
 User: putz@putz
 
 senha: putzputz

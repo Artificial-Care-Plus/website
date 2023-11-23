@@ -11,6 +11,7 @@ export default function Actions() {
     const [value, setValue] = useState('')
     const [min, setMin] = useState(0)
     const [dist, setDist] = useState(0)
+    const walkExercises = ['3', '6', '7', '9', '10']
     const onClick = async () => {
         if (!value || !min) return
         if (min > 24 * 60)
@@ -47,6 +48,20 @@ export default function Actions() {
             console.log('Enviado')
         })
         setUser({ ...user, score: user.score + body.score })
+        if (dist && walkExercises.includes(atividade)) {
+            const steps = Math.trunc(
+                (
+                    await (
+                        await fetch(
+                            `/api/passos?workout_type=${mapAcoesLabel(
+                                desc,
+                            )}&time=${min}&distance=${dist}`,
+                        )
+                    ).json()
+                ).prediction,
+            )
+            alert(`Você deu ${steps} passos`)
+        }
         console.log(user)
     }
     return (
@@ -80,7 +95,7 @@ export default function Actions() {
                     <option value="10">Esteira</option>
                     <option value="11">Cricket</option>
                 </select>
-                {['3', '6', '7', '9', '10'].includes(atividade) ? (
+                {walkExercises.includes(atividade) ? (
                     <>
                         <label htmlFor="distancia">Por quantos Km:</label>
                         <input

@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## NAVEGAÇÃO PELO SITE
 
-## Getting Started
+# Página de Login e Cadastro:
 
-First, run the development server:
+Ao acessar o site, você será direcionado para a página de login. Caso não tenha uma conta, você pode facilmente se cadastrar ao clicar em Crie sua conta para começar a monitorar e melhorar sua saúde.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Cabeçalho:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Após o login, no topo da página, você pode clicar na logo do cabeçalho para ser redirecionado para a página principal do site. O cabeçalho é personalizado com o seu nome de usuário que ao clicar você terá acesso à opção de alterar seus dados pessoais.Além disso, será exibido o seu "Health Score", uma pontuação que reflete seu nível de saúde e suas atividades físicas registradas.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Registro de Atividades:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+No conteúdo principal do site, você terá um campo dedicado para registrar as atividades que praticou durante o dia. Informe a atividade e a duração para manter um registro preciso de suas práticas físicas.
 
-## Learn More
+# Dicas de Saúde:
 
-To learn more about Next.js, take a look at the following resources:
+Há tambem um campo dedicado a dicas para receber orientações motivacionais e informações úteis para aprimorar sua saúde e, consequentemente, aumentar o seu Health Score.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Ícone de Interrogação:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Caso tenha dúvidas ou queira saber mais sobre nós, confira o ícone com ponto de interrogação. Lá você encontrará informações sobre a equipe, respostas para perguntas frequentes (FAQ) e dicas adicionais sobre saúde.
 
-## Deploy on Vercel
+# INTEGRANTES
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No rodapé do site, você encontrará informações sobre os dedicados desenvolvedores que contribuíram para a criação e aprimoramento contínuo do Artificial Care Plus.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## INSTRUÇÕES PARA INSTALAÇÃO DAS API'S
+
+Para garantir o pleno funcionamento do nosso site e desfrutar de todas as suas funcionalidades, é necessário realizar o download e a instalação das APIs em Java e Python disponíveis em nossa organização no GitHub.
+
+Passos para Instalação:
+
+1. Java API:
+
+    - Acesse [este link](https://github.com/Artificial-Care-Plus/ArtificialCareApi.git) para acessar o repositório da API em Java.
+    - Clique no botão "Code" e escolha a opção de download ZIP.
+    - Após o download, descompacte o arquivo em um diretório de sua escolha.
+    - Siga as instruções no arquivo README.md para configurar e instalar a API em Java.
+
+2. Python API:
+    - Acesse [este link](https://github.com/Artificial-Care-Plus/IA-API.git) para acessar o repositório da API em Python.
+    - Clique no botão "Code" e escolha a opção de download ZIP.
+    - Após o download, descompacte o arquivo em um diretório de sua escolha.
+    - Siga as instruções no arquivo README.md para configurar e instalar a API em Python.

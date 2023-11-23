@@ -64,7 +64,7 @@ export default function Actions() {
                     }}
                     id="atividade"
                 >
-                    <option value="0" disabled selected>
+                    <option value="0" disabled selected defaultValue={'0'}>
                         Selecione
                     </option>
                     <option value="1">Treino livre</option>

@@ -38,7 +38,6 @@ export default function History() {
                     const acoes = await getAcoes(user.email)
                     setHistory(acoes)
                     setFetchFeito(true)
-                    console.log(acoes)
                 }, 1000)
             }
         }
@@ -75,7 +74,7 @@ export default function History() {
                                 )
                             })
                         ) : (
-                            <p className="animate-pulse text-2xl">
+                            <p className="animate-pulse cursor-default text-2xl">
                                 Adicione uma Ação
                             </p>
                         )}

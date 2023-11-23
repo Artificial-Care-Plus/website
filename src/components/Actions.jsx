@@ -70,19 +70,19 @@ export default function Actions() {
         console.log(user)
     }
     return (
-        <div className="w-2/3 border-4 border-green-600 p-4">
+        <div className="flex w-2/3 flex-col items-center justify-center p-4 max-xl:w-full">
             {steps > 0 && (
                 <PopUp>
                     <h1>Você deu aproximadamente {steps} passos</h1>
                 </PopUp>
             )}
-            <h1 className="text-center text-2xl">
+            <h1 className="mb-2 text-center text-2xl">
                 Quais Atividades Você praticou hoje?
             </h1>
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex w-full flex-col items-center gap-2">
                 <select
                     defaultValue="0"
-                    className="w-1/2 rounded-lg border border-black p-1"
+                    className="w-1/2 rounded-lg border-2 border-black p-1 max-sm:w-full"
                     onChange={(e) => {
                         setValue(e.target.value)
                         setDesc(e.target.options[e.target.selectedIndex].text)
@@ -106,40 +106,42 @@ export default function Actions() {
                     <option value="11">Cricket</option>
                 </select>
                 {walkExercises.includes(atividade) ? (
-                    <>
+                    <div className="flex w-full flex-col items-center">
                         <label htmlFor="distancia">Por quantos Km:</label>
                         <input
                             type="number"
                             name="distancia"
                             id="distancia"
-                            className="w-1/6 rounded-lg border border-black p-1"
+                            className="w-1/5 rounded-lg border-2 border-black p-1 max-md:w-1/2 max-sm:w-full"
                             max={200}
                             min={0.1}
                             onChange={(e) => {
                                 setDist(e.target.value)
                             }}
                         />
-                    </>
+                    </div>
                 ) : (
                     ''
                 )}
-                <label htmlFor="minutos">Por quantos minutos:</label>
-                <input
-                    type="number"
-                    name="minutos"
-                    id="minutos"
-                    className="w-1/6 rounded-lg border border-black p-1"
-                    max={24}
-                    min={0.1}
-                    onChange={(e) => {
-                        setMin(e.target.value)
-                    }}
-                />
+                <div className="flex w-full flex-col items-center">
+                    <label htmlFor="minutos">Por quantos minutos:</label>
+                    <input
+                        type="number"
+                        name="minutos"
+                        id="minutos"
+                        className="w-1/5 rounded-lg border-2 border-black p-1 max-md:w-1/2 max-sm:w-full"
+                        max={1440}
+                        min={0.1}
+                        onChange={(e) => {
+                            setMin(e.target.value)
+                        }}
+                    />
+                </div>
                 <button
                     onClick={() => {
                         onClick()
                     }}
-                    className="rounded-sm border border-black p-2"
+                    className="mt-4 min-h-[40px] rounded-md bg-cor-principal p-2 text-xl font-semibold text-white transition-all duration-200 hover:bg-cor-principal-hover"
                 >
                     Adicionar
                 </button>

@@ -15,13 +15,12 @@ export default function Tip() {
                 const response = await fetch(`/api/dica/${score}`)
                 const data = await response.json()
                 setTip(pickRandom(data).texto)
-                console.log(data)
             }
         }
         fetchData()
     }, [user])
     return (
-        <div className="w-1/3 border-4 border-purple-700">
+        <div className="flex w-1/3 flex-col items-center justify-center p-4 max-xl:w-full">
             <Image
                 alt="Imagem de uma pessoa se exercitando"
                 src={'/static/fitness/3.jpg'}

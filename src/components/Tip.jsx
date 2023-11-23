@@ -31,7 +31,7 @@ export default function Tip() {
                 height={300}
                 className="rounded-lg"
             />
-            <h1>Dica: {tip}</h1>
+            <h1>Dica: {tip || <span className="animate-pulse">...</span>}</h1>
         </div>
     )
 }

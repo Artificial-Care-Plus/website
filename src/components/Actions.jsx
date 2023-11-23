@@ -2,6 +2,7 @@
 
 import { mapAcoesLabel } from '@/modules/scoreCalculation'
 import { useContext, useState } from 'react'
+import PopUp from './PopUp'
 import { UserContext } from './User'
 
 export default function Actions() {
@@ -11,6 +12,8 @@ export default function Actions() {
     const [value, setValue] = useState('')
     const [min, setMin] = useState(0)
     const [dist, setDist] = useState(0)
+    const [steps, setSteps] = useState(0)
+    const walkExercises = ['3', '6', '7', '9', '10']
     const onClick = async () => {
         if (!value || !min) return
         if (min > 24 * 60)
@@ -47,10 +50,32 @@ export default function Actions() {
             console.log('Enviado')
         })
         setUser({ ...user, score: user.score + body.score })
+        if (dist && walkExercises.includes(atividade)) {
+            const steps = Math.trunc(
+                (
+                    await (
+                        await fetch(
+                            `/api/passos?workout_type=${mapAcoesLabel(
+                                desc,
+                            )}&time=${min}&distance=${dist}`,
+                        )
+                    ).json()
+                ).prediction,
+            )
+            setSteps(steps)
+            setTimeout(() => {
+                setSteps(0)
+            }, 2999)
+        }
         console.log(user)
     }
     return (
         <div className="w-2/3 border-4 border-green-600 p-4">
+            {steps > 0 && (
+                <PopUp>
+                    <h1>Você deu aproximadamente {steps} passos</h1>
+                </PopUp>
+            )}
             <h1 className="text-center text-2xl">
                 Quais Atividades Você praticou hoje?
             </h1>
@@ -80,7 +105,7 @@ export default function Actions() {
                     <option value="10">Esteira</option>
                     <option value="11">Cricket</option>
                 </select>
-                {['3', '6', '7', '9', '10'].includes(atividade) ? (
+                {walkExercises.includes(atividade) ? (
                     <>
                         <label htmlFor="distancia">Por quantos Km:</label>
                         <input

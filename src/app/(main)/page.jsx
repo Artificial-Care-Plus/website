@@ -15,7 +15,7 @@ export default function Home() {
     })
     return (
         <>
-            <div className="flex h-full w-full flex-row flex-wrap justify-center">
+            <div className="flex w-full flex-row flex-wrap justify-center">
                 <Tip />
                 <Actions />
                 <History />

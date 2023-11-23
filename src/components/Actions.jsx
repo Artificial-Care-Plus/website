@@ -57,8 +57,6 @@ export default function Actions() {
             <div className="flex flex-col items-center gap-2">
                 <select
                     defaultValue="0"
-                    defaultValue={'0'}
-
                     className="w-1/2 rounded-lg border border-black p-1"
                     onChange={(e) => {
                         setValue(e.target.value)

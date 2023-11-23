@@ -56,6 +56,7 @@ export default function Actions() {
             </h1>
             <div className="flex flex-col items-center gap-2">
                 <select
+                    defaultValue={'0'}
                     className="w-1/2 rounded-lg border border-black p-1"
                     onChange={(e) => {
                         setValue(e.target.value)
@@ -64,7 +65,7 @@ export default function Actions() {
                     }}
                     id="atividade"
                 >
-                    <option value="0" disabled selected defaultValue={'0'}>
+                    <option value="0" disabled selected>
                         Selecione
                     </option>
                     <option value="1">Treino livre</option>

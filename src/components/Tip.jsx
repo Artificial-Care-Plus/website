@@ -1,11 +1,28 @@
+'use client'
 import Image from 'next/image'
+import { useEffect, useState, useContext } from 'react'
+import { UserContext } from './User'
 
-export default async function Tip() {
+export default function Tip() {
     const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)]
     const images = ['1.jpg', '2.jpg', '3.jpg']
     const loader = ({ src }) => {
         return `${src}/${pickRandom(images)}`
     }
+    const [user, setUser] = useContext(UserContext)
+    const [tip, setTip] = useState('')
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user) {
+                const score = user.score
+                const response = await fetch(`/api/dica/${score}`)
+                const data = await response.json()
+                setTip(pickRandom(data).texto)
+                console.log(data)
+            }
+        }
+        fetchData()
+    }, [user])
     return (
         <div className="w-1/3 border-4 border-purple-700">
             <Image
@@ -18,7 +35,7 @@ export default async function Tip() {
                 height={300}
                 className="rounded-lg"
             />
-            <h1>Dica</h1>
+            <h1>Dica: {tip}</h1>
         </div>
     )
 }

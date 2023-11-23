@@ -1,9 +1,8 @@
 'use client'
-import { useContext, useState } from 'react'
-import { IoCloseSharp } from "react-icons/io5";
+import { useContext, useEffect, useState } from 'react'
+import { IoCloseSharp } from 'react-icons/io5'
 import StatusMsg from './StatusMsg'
 import { UserContext } from './User'
-
 
 export default function ModalUser({ setOpenModal }) {
     const [status, setStatus] = useState(null)
@@ -17,22 +16,20 @@ export default function ModalUser({ setOpenModal }) {
         altura: 0,
     })
 
-    useState(() => { (async () => {
+    useEffect(() => {
+        ;(async () => {
             const response = await fetch(
                 `/api/usuario/${localStorage.getItem('email')}`,
-                
             )
-            const statusAPI = response.status;
-            const user = await response.json();
-            if (statusAPI === 200){
-            setUser(user)
-        }
-        else{
-            setStatus({sucesso: user.sucesso, resposta: user.resposta})
-        }
-        })();
-    }
-    , [])
+            const statusAPI = response.status
+            const user = await response.json()
+            if (statusAPI === 200) {
+                setUser(user)
+            } else {
+                setStatus({ sucesso: user.sucesso, resposta: user.resposta })
+            }
+        })()
+    }, [])
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -49,44 +46,45 @@ export default function ModalUser({ setOpenModal }) {
                 },
                 body: JSON.stringify(user),
             },
-            
         )
         const data = await response.json()
-        if(data.sucesso){
-            updateUser({...user})
-            setStatus({sucesso: data.sucesso, resposta: data.resposta})
+        if (data.sucesso) {
+            updateUser({ ...user })
+            setStatus({ sucesso: data.sucesso, resposta: data.resposta })
             setTimeout(() => {
                 setStatus(null)
                 setOpenModal(false)
             }, 2000)
-        }
-        else{
-            setStatus({sucesso: data.sucesso, resposta: data.resposta})
+        } else {
+            setStatus({ sucesso: data.sucesso, resposta: data.resposta })
             setTimeout(() => {
                 setStatus(null)
             }, 2000)
-
         }
     }
 
     return (
         <div className="formUpdate fixed right-0 top-0 z-40  w-1/3 overflow-scroll max-lg:w-screen">
             <div className="relative">
-            {status && (
-                <div className="absolute left-[50%] z-50 w-full translate-x-[-50%]">
+                {status && (
+                    <div className="absolute left-[50%] z-50 w-full translate-x-[-50%]">
                         <StatusMsg
                             resposta={status.resposta}
                             sucesso={status.sucesso}
                         />
                     </div>
-                    )}
+                )}
                 <div
                     onClick={() => setOpenModal(false)}
                     className="absolute right-2 top-2 cursor-pointer font-extrabold text-black"
                 >
-                    <IoCloseSharp className='text-3xl'/>    
+                    <IoCloseSharp className="text-3xl" />
                 </div>
-                <form action="#" onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 text-black">
+                <form
+                    action="#"
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-4 p-4 text-black"
+                >
                     <legend className="text-2xl font-bold text-black max-lg:text-center">
                         Atualizar Dados
                     </legend>
@@ -130,7 +128,11 @@ export default function ModalUser({ setOpenModal }) {
                             step="any"
                         />
                     </div>
-                    <input type="hidden" value={user.nascimento} name="nascimento" />
+                    <input
+                        type="hidden"
+                        value={user.nascimento}
+                        name="nascimento"
+                    />
                     <input type="hidden" value={user.email} name="email" />
                     <input type="hidden" value={user.senha} name="senha" />
                     <button>Atualizar</button>

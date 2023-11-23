@@ -1,5 +1,4 @@
 'use client'
-import { serverUrl } from '@/modules/javaServerHelper'
 import { getAcoes } from '@/modules/scoreCalculation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,7 +14,7 @@ export default function Header() {
     useEffect(() => {
         ;(async () => {
             const response = await fetch(
-                `${serverUrl}/usuario/${localStorage.getItem('email')}`,
+                `api/usuario/${localStorage.getItem('email')}`,
             )
             const user = await response.json()
             const acoes = await getAcoes(user.email)

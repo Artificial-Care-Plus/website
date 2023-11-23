@@ -15,20 +15,23 @@ export default function History() {
     useEffect(() => {
         const fetchData = async () => {
             if (user) {
-                const acoes = await getAcoes(user.email)
-                console.log(acoes)
-                setHistory(acoes)
+                setTimeout(async () => {
+                    // Esse timeout é só para dar tempo do servidor receber a ação
+                    const acoes = await getAcoes(user.email)
+                    console.log(acoes)
+                    setHistory(acoes)
+                }, 1000)
             }
         }
         fetchData()
     }, [user])
     return (
         <div>
-            <ul className="flex flex-row flex-wrap gap-8">
+            <ul className="grid grid-cols-3 gap-4">
                 {history.length > 1 ? (
-                    history.map((item) => {
+                    history.map((item, index) => {
                         return (
-                            <li key={item}>
+                            <li key={index}>
                                 {new Date(item.data).toLocaleDateString()}:{' '}
                                 {item.descricao} - {item.score} Pontos:{' '}
                                 {item.duracao} Minutos

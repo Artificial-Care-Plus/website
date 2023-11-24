@@ -16,12 +16,14 @@ export default function RootLayout({ children }) {
     return (
         <html lang="pt-br">
             <body className={inter.className}>
-                <User>
-                    <Header />
-                    {children}
-                </User>
-                <Footer />
-                <Nav />
+                <div className="flex h-full flex-col justify-between">
+                    <User>
+                        <Header />
+                        {children}
+                    </User>
+                    <Footer />
+                    <Nav />
+                </div>
             </body>
         </html>
     )

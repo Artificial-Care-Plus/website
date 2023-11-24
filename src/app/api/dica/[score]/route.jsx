@@ -3,8 +3,12 @@ import { serverUrl } from '@/modules/javaServerHelper'
 export async function GET(req, { params }) {
     const url = `${serverUrl}/dicas`
     try {
-        const response = await fetch(url)
-        let data = await response.json()
+        const response = await fetch(url, {
+            cache: 'no-cache',
+        })
+        const text = await response.text()
+        let data = JSON.parse(text)
+        console.log(data, text)
         if (response.status === 200) {
             if (params.score < 500) {
                 data = data.filter((dica) => dica.categoria === 'Ruim')
